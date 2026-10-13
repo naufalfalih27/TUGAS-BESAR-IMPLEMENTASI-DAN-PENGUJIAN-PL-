@@ -247,7 +247,7 @@ address {
   height: auto;
 }
 
-/* Gradasi supaya teks putih terbaca */
+/* Gradasi */
 .hero::after {
   content: "";
   position: absolute;
@@ -619,7 +619,7 @@ address {
   }
 }
 
-/* ---------- 11. DESKTOP (min 1024px) ---------- */
+/* 11. DESKTOP (min 1024px) */
 @media (min-width: 1024px) {
   .navbar {
     padding-left: max(var(--gutter), calc((100% - var(--container)) / 2));
