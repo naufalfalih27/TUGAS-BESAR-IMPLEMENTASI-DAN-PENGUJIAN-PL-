@@ -1,7 +1,7 @@
 /* 
    KkTF Landing Page - style.css 
    Urutan: 1 Variables, 2 Reset, 3 Komponen umum, 4 Navbar,
-           5 Hero, 6 Deals, 7 Lineup, 8 Vibes, 9 Footer,
+           5 Hero, 6 Deals, 7 Lineup, 8 Vibes, 9 Footer, 9b Catalog,
            10 Tablet (768px), 11 Desktop (1024px)
  */
 
@@ -20,6 +20,9 @@
   --bg: #f7f7f7;
   --surface: #ffffff;
   --border: #e8e2e0;
+  --sidebar: #f3eee8;
+  --sidebar-active: rgba(0, 0, 0, 0.06);
+  --catalog-bg: url("../assets/images/catalog-bg-light.png");
 
   /* Font */
   --font-heading: "Noto Serif", Georgia, serif;
@@ -40,6 +43,9 @@
   --text: #d9cbc8;
   --muted: #a89a97;
   --border: #3a2d2b;
+  --sidebar: #2a201e;
+  --sidebar-active: rgba(255, 255, 255, 0.18);
+  --catalog-bg: url("../assets/images/catalog-bg-dark.png");
 }
 
 /*2. RESET*/
@@ -148,9 +154,10 @@ address {
   top: 0;
   z-index: 50;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.5rem 1rem;
   padding: 0.75rem var(--gutter);
   background: var(--bg);
   border-bottom: 1px solid var(--border);
@@ -162,16 +169,6 @@ address {
   gap: 0.5rem;
 }
 
-.navbar__burger {
-  width: 2rem;
-  height: 2rem;
-  display: grid;
-  place-items: center;
-}
-.navbar__burger img {
-  width: 1.1rem;
-}
-
 .navbar__logo {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -179,28 +176,19 @@ address {
   color: var(--red);
 }
 
-/* Menu: mobile = dropdown di bawah navbar */
+/* Menu: mobile = baris sendiri di bawah logo */
 .navbar__nav {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  display: none;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  padding: 0.5rem var(--gutter) 1rem;
-}
-.navbar__nav.is-open {
-  display: block;
+  order: 3;
+  width: 100%;
 }
 
 .navbar__links {
   display: flex;
-  flex-direction: column;
+  gap: 1.25rem;
 }
 .navbar__links a {
   display: block;
-  padding: 0.6rem 0;
+  padding: 0.25rem 0;
   font-size: 0.875rem;
   color: var(--text);
 }
@@ -213,13 +201,6 @@ address {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.navbar__login {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  margin-right: 0.25rem;
 }
 
 .icon-btn {
@@ -544,6 +525,135 @@ address {
   gap: 1rem;
 }
 
+/*9b. CATALOG*/
+.catalog {
+  display: grid;
+  min-height: calc(100vh - 4rem);
+}
+
+/* Sidebar: mobile = deretan tombol yang bisa digeser */
+.catalog__sidebar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem var(--gutter);
+  overflow-x: auto;
+  background: var(--sidebar);
+}
+
+.cat-btn {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text);
+  text-align: left;
+  border-radius: 0.25rem;
+  transition: background 0.2s;
+}
+.cat-btn img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.cat-btn:hover {
+  background: var(--sidebar-active);
+}
+.cat-btn.is-active {
+  background: var(--sidebar-active);
+  color: var(--red);
+  font-weight: 600;
+}
+
+.cat-btn.is-active img {
+  filter: brightness(0) saturate(100%) invert(12%) sepia(96%) saturate(5000%) hue-rotate(350deg) brightness(85%) contrast(95%);
+}
+
+[data-theme="dark"] .cat-btn img {
+  filter: invert(1);
+}
+[data-theme="dark"] .cat-btn.is-active img {
+  filter: brightness(0) saturate(100%) invert(12%) sepia(96%) saturate(5000%) hue-rotate(350deg) brightness(85%) contrast(95%);
+}
+
+.catalog__content {
+  padding: 2rem var(--gutter) 3rem;
+  background-color: var(--bg);
+  background-image: var(--catalog-bg);
+  background-position: center;
+  background-size: cover;
+}
+
+.catalog__title {
+  margin-bottom: 2rem;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.catalog__title::after {
+  content: "";
+  display: block;
+  width: 5rem;
+  height: 3px;
+  margin-top: 0.5rem;
+  background: var(--red);
+}
+
+.catalog__panel {
+  display: none;
+}
+.catalog__panel.is-active {
+  display: block;
+}
+
+.catalog__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 1.5rem;
+}
+
+/* Kartu katalog lebih besar dari kartu lineup */
+.catalog .product-card {
+  flex: none;
+  padding: 1.5rem 1.25rem 1.25rem;
+}
+.catalog .product-card__image {
+  height: 9rem;
+  margin-bottom: 1.5rem;
+}
+.catalog .product-card__name {
+  font-size: 1.125rem;
+}
+.catalog .product-card__desc {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.875rem;
+}
+.catalog .product-card__price {
+  font-size: 1.125rem;
+}
+.catalog .add-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+}
+.catalog .like-btn {
+  top: 1rem;
+  right: 1rem;
+  width: 3.5rem;
+  padding: 0.6rem 0;
+  font-size: 0.75rem;
+}
+.catalog .like-btn img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Latar dan sidebar menyambung langsung ke garis footer */
+.catalog ~ .footer {
+  margin-top: 0;
+}
+
 /*10. TABLET (min 768px)*/
 @media (min-width: 768px) {
   :root {
@@ -562,18 +672,11 @@ address {
   .navbar__actions {
     justify-self: end;
   }
-  .navbar__burger {
-    display: none;
-  }
   .navbar__nav {
-    position: static;
-    display: block;
-    padding: 0;
-    border: 0;
-    background: none;
+    order: 0;
+    width: auto;
   }
   .navbar__links {
-    flex-direction: row;
     gap: 2rem;
   }
   .navbar__links a {
@@ -616,6 +719,23 @@ address {
   .footer__top {
     grid-template-columns: 1.5fr 1.5fr 1fr;
     gap: 3rem;
+  }
+
+  /* Catalog: sidebar di kiri */
+  .catalog {
+    grid-template-columns: 16rem 1fr;
+  }
+  .catalog__sidebar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 4rem 1.5rem;
+    overflow: visible;
+  }
+  .catalog__content {
+    padding: 4rem 2rem;
+  }
+  .catalog__title {
+    font-size: 2.5rem;
   }
 }
 
