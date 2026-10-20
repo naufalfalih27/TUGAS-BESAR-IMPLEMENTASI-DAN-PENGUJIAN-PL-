@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Produk | KkTF</title>
+  <meta name="description" content="Detail produk KkTF: pilih tingkat es dan gula, lalu tambahkan ke keranjang.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/product.css">
+</head>
+<body class="detail-page">
+
+  <!-- NAVBAR -->
+  <header class="navbar navbar--detail">
+    <div class="navbar__left">
+      <a href="catalog.html" class="icon-btn" aria-label="Kembali ke katalog" id="backLink">
+        <img src="assets/icons/back.svg" alt="" onerror="this.replaceWith(document.createTextNode('←'))">
+      </a>
+      <a href="index.html" class="navbar__logo">KkTF</a>
+    </div>
+
+    <div class="navbar__actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Ganti tema">
+        <img src="assets/icons/dark mode.svg" alt="">
+      </button>
+      <a href="cart.html" class="icon-btn" aria-label="Keranjang">
+        <img src="assets/icons/cart.svg" alt="">
+      </a>
+      <a href="login.html" class="icon-btn" aria-label="Akun">
+        <img src="assets/icons/account.svg" alt="" onerror="this.style.display='none'">
+      </a>
+    </div>
+  </header>
+
+  <main class="detail">
+
+    <!-- FOTO PRODUK -->
+    <div class="detail__media">
+      <button class="like-btn" id="detailLike" aria-label="Sukai produk ini">
+        <img src="assets/icons/love.svg" alt=""><span>0</span>
+      </button>
+      <img class="detail__image" id="pImage" alt="">
+    </div>
+
+    <!-- INFO PRODUK -->
+    <div class="detail__info">
+      <p class="detail__series" id="pSeries"></p>
+      <h1 class="detail__name" id="pName"></h1>
+      <p class="detail__price">
+        <span id="pPrice"></span>
+        <s id="pOld" hidden></s>
+      </p>
+
+      <blockquote class="detail__quote" id="pDesc"></blockquote>
+
+      <div class="detail__serving" id="servingBox">
+        <img src="assets/icons/serving.svg" alt="" onerror="this.style.display='none'">
+        <span class="detail__serving-label">SERVING</span>
+        <div class="detail__serving-pill" id="servingFixed">ICE</div>
+        <div class="detail__serving-options" id="servingChoice" hidden>
+          <button type="button" class="serve" data-value="Hot" aria-pressed="false">HOT</button>
+          <button type="button" class="serve" data-value="Ice" aria-pressed="true">ICE</button>
+        </div>
+      </div>
+
+      <div class="opt-group" id="iceGroup">
+        <h2 class="opt-title">ICE LEVEL</h2>
+        <div class="opt-row">
+          <button type="button" class="opt" data-group="ice" data-value="Normal" aria-pressed="true">Normal</button>
+          <button type="button" class="opt" data-group="ice" data-value="Less Ice" aria-pressed="false">Less Ice</button>
+        </div>
+      </div>
+
+      <div class="opt-group" id="sugarGroup">
+        <h2 class="opt-title">SUGAR</h2>
+        <div class="opt-row">
+          <button type="button" class="opt" data-group="sugar" data-value="Normal" aria-pressed="true">Normal</button>
+          <button type="button" class="opt" data-group="sugar" data-value="Extra Sugar" aria-pressed="false">Extra Sugar</button>
+          <button type="button" class="opt" data-group="sugar" data-value="Less Sugar" aria-pressed="false">Less Sugar</button>
+        </div>
+      </div>
+
+      <button type="button" class="add-cart" id="addCart">
+        <img src="assets/icons/cart.svg" alt="">
+        <span id="addLabel">Add to Cart</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo">KkTF</a>
+        <p>
+          Crafted with care, poured with passion. Explore our curated catalog
+          of pure comfort from rich, aromatic brews to carefully crafted bites
+          designed to fuel your day and spark your inspiration.
+        </p>
+      </div>
+
+      <div class="footer__contact">
+        <h3 class="footer__heading">CONTACT US</h3>
+        <ul>
+          <li>
+            <img src="assets/icons/location.svg" alt="">
+            <address>
+              Pasar Rakyat Bareng Lt3<br>
+              Jl. Terusan Ijen, Klojen, Kota Malang
+            </address>
+          </li>
+          <li>
+            <img src="assets/icons/telp.svg" alt="">
+            <a href="tel:+628123456789">+62 812-3456-789</a>
+          </li>
+          <li>
+            <img src="assets/icons/clock.svg" alt="">
+            <span>Open: 08.00 - 00.01</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__explore">
+        <h3 class="footer__heading">EXPLORE</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="catalog.html">Catalog Menu</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; 2026 KkTF. All rights reserved.</p>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Urutan: cart.js, product.js, lalu script.js -->
+  <script src="js/cart.js" defer></script>
+  <script src="js/product.js" defer></script>
+  <script src="js/script.js" defer></script>
+</body>
+</html>
