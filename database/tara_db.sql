@@ -1,15 +1,6 @@
     CREATE DATABASE IF NOT EXISTS tara_db;
     USE tara_db;
 
-    -- -- 1. Tabel toko
-    -- CREATE TABLE toko (
-    --     tokoID INT AUTO_INCREMENT PRIMARY KEY,
-    --     namaToko VARCHAR(100) NOT NULL,
-    --     alamat TEXT NOT NULL,
-    --     nomorTelepon VARCHAR(20),
-    --     jamOperasional VARCHAR(100)
-    -- );
-
     -- Tabel users
     CREATE TABLE users (
         userID INT AUTO_INCREMENT PRIMARY KEY,
@@ -110,16 +101,6 @@
         kapasitas INT,
         image VARCHAR(255)
     );
-
-    -- Data tabel toko
-    -- INSERT INTO toko
-    -- (namaToko, alamat, nomorTelepon, jamOperasional)
-    -- VALUES
-    -- ('Tara Coffee Kemanggisan', 'Jl. Kemanggisan Raya No. 10, Jakarta', '081234567801', '08:00-22:00'),
-    -- ('Tara Coffee Alam Sutera', 'Jl. Alam Sutera No. 20, Tangerang', '081234567802', '08:00-23:00'),
-    -- ('Tara Coffee Bandung', 'Jl. Dago No. 15, Bandung', '081234567803', '09:00-22:00'),
-    -- ('Tara Coffee Bogor', 'Jl. Pajajaran No. 25, Bogor', '081234567804', '08:00-21:00'),
-    -- ('Tara Coffee Depok', 'Jl. Margonda Raya No. 30, Depok', '081234567805', '09:00-22:00');
 
     -- Data tabel user
     INSERT INTO users
