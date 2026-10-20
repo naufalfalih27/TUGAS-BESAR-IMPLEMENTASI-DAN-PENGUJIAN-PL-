@@ -1,0 +1,363 @@
+/* KkTF - table.css (halaman pilih meja) */
+
+[hidden] {
+  display: none !important;
+}
+
+/* Palet: terang */
+.table-page {
+  --page-bg: #fff5f2;
+  --info-bg: #fdece7;
+  --info-line: #f0cfc8;
+  --info-title: var(--red);
+  --zone-bg: #f3e0da;
+  --zone-line: transparent;
+  --legend-bg: #fce9e4;
+  --legend-line: transparent;
+  --map-bg: #f6e4df;
+  --map-floor: #f8f0ee;
+  --map-ink: #4a3a38;
+  --map-line: #b8a9a5;
+  --st-available: #2b8a4a;
+  --st-reserved: #9b8f8c;
+  --st-selected: #e0302c;
+  background: var(--page-bg);
+}
+
+/* Palet: gelap */
+[data-theme="dark"] .table-page {
+  --page-bg: #1a1413;
+  --info-bg: #2e2321;
+  --info-line: #6b5a56;
+  --info-title: #ff6b73;
+  --zone-bg: #251a18;
+  --zone-line: #8a7a76;
+  --legend-bg: #2e2321;
+  --legend-line: #5a4a47;
+  --map-bg: #c9b8b3;
+  --map-floor: #cdc4c3;
+  --map-ink: #3a2d2b;
+  --map-line: #8e7f7b;
+  --st-available: #1f7a3c;
+  --st-reserved: #8a7e7b;
+  --st-selected: #d6261f;
+}
+
+/* NAVBAR versi detail */
+.navbar.navbar--detail {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background: var(--sidebar);
+}
+.navbar--detail .navbar__actions {
+  gap: 0.75rem;
+}
+@media (min-width: 1024px) {
+  .navbar.navbar--detail {
+    padding-left: max(var(--gutter), calc((100% - 1240px) / 2));
+    padding-right: max(var(--gutter), calc((100% - 1240px) / 2));
+  }
+}
+
+/* LAYOUT */
+.tbl {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 2rem var(--gutter) 3rem;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "head"
+    "info"
+    "map"
+    "zones";
+}
+.tbl__head { grid-area: head; }
+.tbl__info { grid-area: info; }
+.tbl__zones { grid-area: zones; }
+.tbl__map { grid-area: map; }
+
+@media (min-width: 900px) {
+  .tbl {
+    grid-template-columns: 18rem minmax(0, 1fr);
+    grid-template-areas:
+      "info head"
+      "zones map";
+    gap: 2rem;
+    padding-top: 3.5rem;
+  }
+  .tbl__head {
+    align-self: end;
+  }
+}
+
+/* BANNER di atas judul */
+.tbl__banner {
+  position: relative;
+  height: 9rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+.tbl__banner img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+@media (min-width: 900px) {
+  /* Kolom judul setinggi kartu Selection Info, banner mengisi ruang kosong di atas judul */
+  .tbl__head {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+  }
+  .tbl__banner {
+    flex: 1;
+    height: auto;
+    min-height: 7rem;
+  }
+}
+
+/* JUDUL DAN LEGENDA */
+.tbl__title {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.tbl__subtitle {
+  margin-top: 0.5rem;
+  color: var(--text);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding: 0.9rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  background: var(--legend-bg);
+  border: 1px solid var(--legend-line);
+  border-radius: 0.25rem;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.legend__box {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid;
+  border-radius: 0.1rem;
+}
+.legend__box--available { border-color: var(--st-available); }
+.legend__box--reserved { border-color: var(--st-reserved); }
+.legend__box--selected { border-color: var(--st-selected); }
+
+/* INFO PILIHAN */
+.tbl__info {
+  padding: 1.5rem;
+  background: var(--info-bg);
+  border: 1px solid var(--info-line);
+  border-radius: 0.25rem;
+}
+.tbl__info-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--info-title);
+}
+.tbl__info-list {
+  margin-top: 1rem;
+}
+.tbl__info-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.35rem 0;
+  font-size: 0.9375rem;
+}
+.tbl__info-list dt {
+  color: var(--text);
+}
+.tbl__info-list dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+  color: var(--ink);
+}
+.tbl__confirm {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--red);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem -0.4rem rgba(163, 11, 18, 0.55);
+  transition: background 0.2s, opacity 0.2s;
+}
+.tbl__confirm:hover:not(:disabled) {
+  background: var(--red-dark);
+}
+.tbl__confirm:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* KARTU ZONA */
+.tbl__zones {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+@media (min-width: 560px) and (max-width: 899px) {
+  .tbl__zones {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.zone-card {
+  padding: 1rem;
+  text-align: left;
+  background: var(--zone-bg);
+  border: 1px solid var(--zone-line);
+  border-radius: 0.25rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.zone-card:hover,
+.zone-card[aria-pressed="true"] {
+  border-color: var(--red);
+}
+.zone-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--ink);
+}
+.zone-card h3 img {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.zone-card p {
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* DENAH */
+.tbl__map {
+  align-self: start;
+  background: var(--map-bg);
+  border-radius: 0.5rem;
+  box-shadow: 0 1rem 2rem -1rem rgba(0, 0, 0, 0.3);
+}
+.map-scroll {
+  overflow-x: auto;
+}
+.map-svg {
+  display: block;
+  width: 100%;
+  min-width: 44rem;
+  height: auto;
+}
+
+.map-floor { fill: var(--map-floor); }
+.map-line { stroke: var(--map-line); stroke-width: 1.5; }
+.map-dash { fill: none; stroke: var(--map-ink); stroke-width: 1.5; stroke-dasharray: 6 5; }
+.map-outline { fill: none; stroke: var(--map-ink); stroke-width: 2; opacity: 0.7; }
+.map-chevron { fill: none; stroke: var(--map-ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.map-label {
+  font: 600 13px var(--font-body);
+  letter-spacing: 0.14em;
+  text-anchor: middle;
+  fill: var(--map-ink);
+}
+.map-label--lg {
+  font-size: 20px;
+  letter-spacing: 0.22em;
+}
+.map-label--vertical {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+}
+.map-small {
+  font: 600 11px var(--font-body);
+  text-anchor: middle;
+  fill: var(--map-ink);
+}
+
+/* MEJA */
+.tbl,
+.map-deco {
+  transition: opacity 0.2s;
+}
+.map-deco,
+.tbl-node {
+  transition: opacity 0.2s;
+}
+.tbl-node {
+  cursor: pointer;
+  outline: none;
+}
+.tbl-node__shape {
+  fill: transparent;
+  stroke-width: 3;
+  pointer-events: all;
+  transition: fill 0.2s, stroke 0.2s;
+}
+.tbl-node__id {
+  font: 600 14px var(--font-body);
+  text-anchor: middle;
+  dominant-baseline: central;
+  text-decoration: underline;
+  fill: var(--map-ink);
+  pointer-events: none;
+}
+.tbl-node__id--small {
+  font-size: 9px;
+}
+.tbl-node__id--plain {
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+.tbl-node__cap {
+  font: 600 10.5px var(--font-body);
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--map-ink);
+  pointer-events: none;
+}
+
+.tbl-node[data-status="available"] .tbl-node__shape { stroke: var(--st-available); }
+.tbl-node[data-status="available"]:hover .tbl-node__shape,
+.tbl-node[data-status="available"]:focus-visible .tbl-node__shape {
+  fill: rgba(43, 138, 74, 0.16);
+}
+.tbl-node[data-status="reserved"] { cursor: not-allowed; }
+.tbl-node[data-status="reserved"] .tbl-node__shape {
+  stroke: var(--st-reserved);
+  fill: rgba(155, 143, 140, 0.14);
+}
+.tbl-node[data-status="selected"] .tbl-node__shape {
+  stroke: var(--st-selected);
+  fill: rgba(224, 48, 44, 0.1);
+}
+
+/* Sorot zona */
+.is-dim {
+  opacity: 0.25;
+}

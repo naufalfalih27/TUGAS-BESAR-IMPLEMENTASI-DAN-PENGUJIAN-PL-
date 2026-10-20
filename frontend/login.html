@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | KkTF</title>
+  <meta name="description" content="Masuk ke akun KkTF untuk memesan dan menyimpan menu favoritmu.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar">
+    <div class="navbar__left">
+      <a href="index.html" class="navbar__back" aria-label="Kembali ke Home">
+        <img src="assets/icons/back.svg" alt="">
+      </a>
+      <a href="index.html" class="navbar__logo">KkTF</a>
+    </div>
+
+    <nav class="navbar__nav" id="mainNav" aria-label="Navigasi utama">
+      <ul class="navbar__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="catalog.html">Catalog Menu</a></li>
+      </ul>
+    </nav>
+
+    <div class="navbar__actions">
+    <button class="icon-btn" id="themeToggle" aria-label="Ganti tema">
+        <img src="assets/icons/moon.svg" alt="">
+    </button>
+    <button class="icon-btn" aria-label="Rekomendasi">
+        <img src="assets/icons/sparkle.svg" alt="">
+    </button>
+    </div>
+  </header>
+
+  <!-- ============ LOGIN ============ -->
+  <main class="auth">
+
+    <section class="auth__panel">
+      <div class="auth__box">
+        <h1 class="auth__title">Welcome back to Tara.</h1>
+        <p class="auth__subtitle">Pick up where you left off, your favorite cup is waiting.</p>
+
+        <form class="auth__form" id="loginForm" action="#" method="post" novalidate>
+
+          <div class="field">
+            <label for="identifier">Username, Email, or Phone Number</label>
+            <input
+              type="text"
+              id="identifier"
+              name="identifier"
+              placeholder="Username, email, or phone number"
+              autocomplete="username"
+              required>
+            <p class="field__error" id="identifierError" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="field__control">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                autocomplete="current-password"
+                required>
+              <button type="button" class="field__toggle" id="togglePassword" aria-label="Tampilkan password">Show</button>
+            </div>
+            <p class="field__error" id="passwordError" role="alert"></p>
+          </div>
+
+          <div class="auth__row">
+            <label class="check">
+              <input type="checkbox" name="remember">
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="auth__link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="auth__submit">Login</button>
+        </form>
+
+        <p class="auth__switch">
+          Don't have an account? <a href="register.html" class="auth__link auth__link--strong">Create account</a>
+        </p>
+
+        <div class="auth__divider"><span>or continue with</span></div>
+
+        <button type="button" class="auth__google">
+          <img src="assets/icons/google.svg" alt="">
+          Google
+        </button>
+      </div>
+    </section>
+
+    <aside class="auth__image">
+      <img src="assets/images/loginpic.jpg" alt="Interior kedai dengan lampu gantung, jendela besar, dan kursi merah">
+    </aside>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__top">
+
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo">KkTF</a>
+        <p>
+          Log in to unlock your daily comfort. No rush, no noise, just the
+          perfect spot to stay inspired.
+        </p>
+      </div>
+
+      <div class="footer__contact">
+        <h3 class="footer__heading">CONTACT US</h3>
+        <ul>
+          <li>
+            <img src="assets/icons/location.svg" alt="">
+            <address>
+              Pasar Rakyat Bareng Lt3<br>
+              Jl. Terusan Ijen, Klojen, Kota Malang
+            </address>
+          </li>
+          <li>
+            <img src="assets/icons/telp.svg" alt="">
+            <a href="tel:+628123456789">+62 812-3456-789</a>
+          </li>
+          <li>
+            <img src="assets/icons/clock.svg" alt="">
+            <span>Open: 08.00 - 00.01</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__explore">
+        <h3 class="footer__heading">EXPLORE</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="catalog.html">Catalog Menu</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; 2026 KkTF. All rights reserved.</p>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/auth.js" defer></script>
+</body>
+</html>

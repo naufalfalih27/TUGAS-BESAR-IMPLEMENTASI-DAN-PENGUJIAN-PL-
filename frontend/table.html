@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilih Meja | KkTF</title>
+  <meta name="description" content="Pilih meja favoritmu di KkTF: indoor, semi outdoor, bar, atau outdoor.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/table.css">
+</head>
+<body class="table-page">
+
+  <!-- NAVBAR -->
+  <header class="navbar navbar--detail">
+    <div class="navbar__left">
+      <a href="catalog.html" class="icon-btn" aria-label="Kembali ke katalog">
+        <img src="assets/icons/back.svg" alt="" onerror="this.replaceWith(document.createTextNode('←'))">
+      </a>
+      <a href="index.html" class="navbar__logo">KkTF</a>
+    </div>
+
+    <div class="navbar__actions">
+      <a href="login.html" class="navbar__login" data-auth="guest">LOGIN</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Ganti tema">
+        <img src="assets/icons/moon.svg" alt="">
+      </button>
+      <button class="icon-btn" aria-label="Rekomendasi">
+        <img src="assets/icons/sparkle.svg" alt="">
+      </button>
+      <a href="cart.html" class="icon-btn" aria-label="Keranjang">
+        <img src="assets/icons/cart.svg" alt="">
+      </a>
+      <a href="profile.html" class="icon-btn" data-auth="user" hidden aria-label="Informasi akun">
+        <img src="assets/icons/user.svg" alt="">
+      </a>
+    </div>
+  </header>
+
+  <main class="tbl">
+
+    <!-- JUDUL DAN LEGENDA -->
+    <section class="tbl__head">
+      <!-- Gambar banner memanjang: ganti nama file sesuai gambarmu -->
+      <div class="tbl__banner">
+        <img src="assets/images/coba-1.jpg" alt="Suasana KkTF" onerror="this.parentElement.remove()">
+      </div>
+      <h1 class="tbl__title">Pick Your Perfect Spot</h1>
+      <p class="tbl__subtitle">
+        Choose a table that suits your mood, from the cozy bar to the breezy outdoor patio.
+      </p>
+      <ul class="legend">
+        <li><span class="legend__box legend__box--available"></span>Available</li>
+        <li><span class="legend__box legend__box--reserved"></span>Reserved</li>
+        <li><span class="legend__box legend__box--selected"></span>Selected</li>
+      </ul>
+    </section>
+
+    <!-- INFO PILIHAN -->
+    <aside class="tbl__info" aria-live="polite">
+      <h2 class="tbl__info-title">Selection Info</h2>
+      <dl class="tbl__info-list">
+        <div><dt>Zone:</dt><dd id="infoZone">-</dd></div>
+        <div><dt>Table:</dt><dd id="infoTable">-</dd></div>
+        <div><dt>Time:</dt><dd id="infoTime">-</dd></div>
+      </dl>
+      <button type="button" class="tbl__confirm" id="confirmBtn" disabled>Confirm Reservation</button>
+    </aside>
+
+    <!-- DAFTAR ZONA (klik untuk menyorot zona di denah) -->
+    <nav class="tbl__zones" aria-label="Zona tempat duduk">
+      <button type="button" class="zone-card" data-group="indoor" aria-pressed="false">
+        <h3><img src="assets/icons/zone-indoor.svg" alt="" onerror="this.style.display='none'">Indoor</h3>
+        <p>Cozy atmosphere with warm interiors, ideal for meetings or simply enjoying your favorite coffee.</p>
+      </button>
+      <button type="button" class="zone-card" data-group="semi" aria-pressed="false">
+        <h3><img src="assets/icons/zone-semi.svg" alt="" onerror="this.style.display='none'">Semi outdoor</h3>
+        <p>An open yet comfortable atmosphere, great for casual meetings or quality time with friends</p>
+      </button>
+      <button type="button" class="zone-card" data-group="bar" aria-pressed="false">
+        <h3><img src="assets/icons/zone-bar.svg" alt="" onerror="this.style.display='none'">The Bar</h3>
+        <p>Sit at the bar and watch our baristas craft your special coffee with passion and expertise.</p>
+      </button>
+      <button type="button" class="zone-card" data-group="coffee" aria-pressed="false">
+        <h3><img src="assets/icons/zone-coffee.svg" alt="" onerror="this.style.display='none'">Coffee Bar</h3>
+        <p>Perfect for solo coffee enthusiasts who love watching the craft of brewing up close.</p>
+      </button>
+      <button type="button" class="zone-card" data-group="terrace" aria-pressed="false">
+        <h3><img src="assets/icons/zone-terrace.svg" alt="" onerror="this.style.display='none'">Semi outdoor terrace</h3>
+        <p>Enjoy the sunset while sipping your coffee, an unforgettable coffee experience!</p>
+      </button>
+      <button type="button" class="zone-card" data-group="outdoor" aria-pressed="false">
+        <h3><img src="assets/icons/zone-outdoor.svg" alt="" onerror="this.style.display='none'">Outdoor</h3>
+        <p>Coffee under the open sky, experience the freedom and tranquility of nature.</p>
+      </button>
+    </nav>
+
+    <!-- DENAH -->
+    <section class="tbl__map" aria-label="Denah meja">
+      <div class="map-scroll">
+        <svg class="map-svg" id="floorMap" viewBox="0 0 906 867" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Lantai utama dan garis pembatas -->
+          <rect x="42" y="268" width="822" height="534" rx="12" class="map-floor"/>
+          <line x1="42" y1="608" x2="864" y2="608" class="map-line"/>
+          <line x1="364" y1="608" x2="364" y2="800" class="map-line"/>
+          <line x1="680" y1="46" x2="680" y2="257" class="map-line"/>
+
+          <!-- BAR -->
+          <g class="map-deco" data-group="bar">
+            <rect x="42" y="42" width="257" height="219" rx="12" class="map-dash"/>
+            <text x="167" y="66" class="map-label">BAR</text>
+            <rect x="73" y="81" width="206" height="167" rx="12" class="map-outline"/>
+            <rect x="200" y="90" width="71" height="150" rx="12" class="map-outline"/>
+            <text x="235.5" y="160" class="map-small">TABLE</text>
+            <text x="235.5" y="174" class="map-small">BAR</text>
+          </g>
+
+          <text x="452" y="66" class="map-label">SEMI-OUTDOOR TERRACE</text>
+
+          <!-- COFFEE BAR -->
+          <g class="map-deco" data-group="coffee">
+            <rect x="791" y="278" width="59" height="317" rx="12" class="map-outline"/>
+            <text x="820" y="440" class="map-label map-label--vertical" transform="rotate(90 820 437)">COFFEE BAR</text>
+          </g>
+
+          <!-- Label area -->
+          <text x="286" y="711" class="map-label">INDOOR</text>
+          <text x="594" y="704" class="map-label">SEMI</text>
+          <text x="594" y="722" class="map-label">OUTDOOR</text>
+
+          <!-- Pintu masuk -->
+          <path d="M581 832 L589 824 L597 832 M581 824 L589 816 L597 824" class="map-chevron"/>
+          <text x="589" y="854" class="map-label map-label--lg">MAIN ENTRANCE</text>
+
+          <!-- Meja digambar oleh table.js -->
+          <g id="tablesLayer"></g>
+        </svg>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo">KkTF</a>
+        <p>
+          Find your perfect corner. Explore our thoughtfully designed spaces and
+          claim your favorite spot whether you need a quiet nook to power through
+          deadlines or a cozy seat to vibe with friends.
+        </p>
+      </div>
+
+      <div class="footer__contact">
+        <h3 class="footer__heading">CONTACT US</h3>
+        <ul>
+          <li>
+            <img src="assets/icons/location.svg" alt="">
+            <address>
+              Pasar Rakyat Bareng Lt3<br>
+              Jl. Terusan Ijen, Klojen, Kota Malang
+            </address>
+          </li>
+          <li>
+            <img src="assets/icons/telp.svg" alt="">
+            <a href="tel:+628123456789">+62 812-3456-789</a>
+          </li>
+          <li>
+            <img src="assets/icons/clock.svg" alt="">
+            <span>Open: 08.00 - 00.01</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__explore">
+        <h3 class="footer__heading">EXPLORE</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="catalog.html">Catalog Menu</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; 2026 KkTF. All rights reserved.</p>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Urutan: cart.js, table.js, lalu script.js -->
+  <script src="js/cart.js" defer></script>
+  <script src="js/table.js" defer></script>
+  <script src="js/script.js" defer></script>
+</body>
+</html>

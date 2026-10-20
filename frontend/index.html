@@ -24,15 +24,19 @@
     </nav>
 
     <div class="navbar__actions">
+      <a href="login.html" class="navbar__login" data-auth="guest">LOGIN</a>
       <button class="icon-btn" id="themeToggle" aria-label="Ganti tema">
-        <img src="assets\icons\dark mode.svg" alt="">
+        <img src="assets/icons/moon.svg" alt="">
       </button>
       <button class="icon-btn" aria-label="Rekomendasi">
-        <img src="assets\icons\ai.svg" alt="">
+        <img src="assets/icons/sparkle.svg" alt="">
       </button>
-      <button class="icon-btn" class="icon-btn" aria-label="Keranjang">
+      <a href="cart.html" class="icon-btn" aria-label="Keranjang">
         <img src="assets/icons/cart.svg" alt="">
-      </button>
+      </a>
+      <a href="profile.html" class="icon-btn" data-auth="user" hidden aria-label="Informasi akun">
+        <img src="assets/icons/user.svg" alt="">
+      </a>
     </div>
   </header>
 

@@ -196,3 +196,32 @@ document.querySelectorAll(".product-card").forEach((card) => {
     if (e.key === "Enter" && e.target === card) openDetail();
   });
 });
+
+// ---------- Status login ----------
+// SEMENTARA: saat backend siap, ganti isi getUser() dengan
+// pemanggilan API (misalnya GET /api/auth/me).
+function getUser() {
+  try {
+    return JSON.parse(localStorage.getItem("kktf_user"));
+  } catch {
+    return null;
+  }
+}
+
+function logout() {
+  // Nanti tambahkan: fetch("/api/auth/logout", { method: "POST" })
+  localStorage.removeItem("kktf_user");
+  window.location.href = "index.html";
+}
+
+function renderAuth() {
+  const loggedIn = Boolean(getUser());
+  document.querySelectorAll('[data-auth="guest"]').forEach((el) => {
+    el.hidden = loggedIn;
+  });
+  document.querySelectorAll('[data-auth="user"]').forEach((el) => {
+    el.hidden = !loggedIn;
+  });
+}
+
+renderAuth();
