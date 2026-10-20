@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalog Menu | KkTF</title>
+  <meta name="description" content="Katalog menu KkTF: kopi, teh, powder, dan jajanan pasar.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar__left">
+      <a href="index.html" class="navbar__logo">KkTF</a>
+    </div>
+
+    <nav class="navbar__nav" id="mainNav" aria-label="Navigasi utama">
+      <ul class="navbar__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="catalog.html" class="is-active">Catalog Menu</a></li>
+      </ul>
+    </nav>
+
+    <div class="navbar__actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Ganti tema">
+        <img src="assets/icons/dark mode.svg" alt="">
+      </button>
+      <button class="icon-btn" aria-label="Rekomendasi">
+        <img src="assets/icons/ai.svg" alt="">
+      </button>
+      <a href="cart.html" class="icon-btn" aria-label="Keranjang">
+        <img src="assets/icons/cart.svg" alt="">
+      </a>
+    </div>
+  </header>
+
+  <main class="catalog">
+
+    <!-- SIDEBAR KATEGORI -->
+    <aside class="catalog__sidebar" aria-label="Kategori menu">
+      <button class="cat-btn is-active" data-target="signature">
+        <img src="assets/icons/side-1.svg" alt=""> Tara Signature Coffee
+      </button>
+      <button class="cat-btn" data-target="basic">
+        <img src="assets/icons/side-2.svg" alt=""> Tara Coffee Basic
+      </button>
+      <button class="cat-btn" data-target="tea">
+        <img src="assets/icons/side-3.svg" alt=""> Basic Tea
+      </button>
+      <button class="cat-btn" data-target="powder">
+        <img src="assets/icons/side-4.svg" alt=""> Basic Powder
+      </button>
+      <button class="cat-btn" data-target="jajanan">
+        <img src="assets/icons/side-5.svg" alt=""> Jajanan Pasar
+      </button>
+    </aside>
+
+    <!-- ISI KATALOG -->
+    <div class="catalog__content">
+
+      <!-- TARA SIGNATURE COFFEE -->
+      <section class="catalog__panel is-active" id="signature">
+        <h1 class="catalog__title">Tara Signature Coffee</h1>
+        <div class="catalog__grid">
+
+          <article class="product-card">
+            <button class="like-btn is-liked" aria-label="Sukai Ta Co Syuu">
+              <img src="assets/icons/love.svg" alt=""><span>1.2k</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Ta Co Syuu.png" alt="Ta Co Syuu">
+            <h3 class="product-card__name">Ta Co Syuu</h3>
+            <p class="product-card__desc">Sweet milk coffee with a distinctive aroma, soft, and tempting taste.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 17.000</span>
+              <button class="add-btn" aria-label="Tambah Ta Co Syuu ke keranjang">+</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <button class="like-btn" aria-label="Sukai Caramella">
+              <img src="assets/icons/love.svg" alt=""><span>200</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Caramella.png" alt="Caramella">
+            <h3 class="product-card__name">Caramella</h3>
+            <p class="product-card__desc">Sweet caramel with thick milk coffee, soft, and savory taste.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 20.000</span>
+              <button class="add-btn" aria-label="Tambah Caramella ke keranjang">+</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <button class="like-btn" aria-label="Sukai Gendis">
+              <img src="assets/icons/love.svg" alt=""><span>450</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Gendis.png" alt="Gendis">
+            <h3 class="product-card__name">Gendis</h3>
+            <p class="product-card__desc">Sweet gendis with rich palm sugar, a naturally delightful treat.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 20.000</span>
+              <button class="add-btn" aria-label="Tambah Gendis ke keranjang">+</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <button class="like-btn is-liked" aria-label="Sukai Ta Co Brrr">
+              <img src="assets/icons/love.svg" alt=""><span>700</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Ta Co Brrr.png" alt="Ta Co Brrr">
+            <h3 class="product-card__name">Ta Co Brrr</h3>
+            <p class="product-card__desc">Refreshing basic cold brew with strong coffee flavor and natural sweet taste.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 22.000</span>
+              <button class="add-btn" aria-label="Tambah Ta Co Brrr ke keranjang">+</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- TARA COFFEE BASIC -->
+      <section class="catalog__panel" id="basic">
+        <h1 class="catalog__title">Tara Coffee Basic</h1>
+        <div class="catalog__grid">
+
+          <article class="product-card">
+            <button class="like-btn is-liked" aria-label="Sukai Kopi Tubruk">
+              <img src="assets/icons/love.svg" alt=""><span>1.2k</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Kopi Tubruk.png" alt="Kopi Tubruk">
+            <h3 class="product-card__name">Kopi Tubruk</h3>
+            <p class="product-card__desc">Dark black tubruk coffee, strong aroma, full of delicious taste.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 12.000</span>
+              <button class="add-btn" aria-label="Tambah Kopi Tubruk ke keranjang">+</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <button class="like-btn" aria-label="Sukai Kopi Saring Susu">
+              <img src="assets/icons/love.svg" alt=""><span>630</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Kopi Saring Susu.png" alt="Kopi Saring Susu">
+            <h3 class="product-card__name">Kopi Saring Susu</h3>
+            <p class="product-card__desc">Rich coffee with sweetened condensed milk, soft, and refreshing.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 15.000</span>
+              <button class="add-btn" aria-label="Tambah Kopi Saring Susu ke keranjang">+</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <button class="like-btn is-liked" aria-label="Sukai Kopi Saring Butter">
+              <img src="assets/icons/love.svg" alt=""><span>1.2k</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Kopi Saring Butter.png" alt="Kopi Saring Butter">
+            <h3 class="product-card__name">Kopi Saring Butter</h3>
+            <p class="product-card__desc">Butter-filtered coffee that is rich with a smooth, aromatic, and indulgent taste.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 16.000</span>
+              <button class="add-btn" aria-label="Tambah Kopi Saring Butter ke keranjang">+</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <button class="like-btn is-liked" aria-label="Sukai Kopi Susu Tubruk">
+              <img src="assets/icons/love.svg" alt=""><span>1.2k</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Kopi Susu Tubruk.png" alt="Kopi Susu Tubruk">
+            <h3 class="product-card__name">Kopi Susu Tubruk</h3>
+            <p class="product-card__desc">Full-flavored milk coffee with a smooth sweetness in the mouth.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 13.000</span>
+              <button class="add-btn" aria-label="Tambah Kopi Susu Tubruk ke keranjang">+</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <button class="like-btn is-liked" aria-label="Sukai Kopi Saring Hitam">
+              <img src="assets/icons/love.svg" alt=""><span>1.2k</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Kopi Saring Hitam.png" alt="Kopi Saring Hitam">
+            <h3 class="product-card__name">Kopi Saring Hitam</h3>
+            <p class="product-card__desc">Dark black filtered coffee with a distinctive taste and captivating aroma.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 14.000</span>
+              <button class="add-btn" aria-label="Tambah Kopi Saring Hitam ke keranjang">+</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- BASIC TEA (isi contoh, sesuaikan) -->
+      <section class="catalog__panel" id="tea">
+        <h1 class="catalog__title">Basic Tea</h1>
+        <div class="catalog__grid">
+
+          <article class="product-card">
+            <button class="like-btn" aria-label="Sukai Greentea">
+              <img src="assets/icons/love.svg" alt=""><span>320</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Greentea.png" alt="Greentea">
+            <h3 class="product-card__name">Greentea</h3>
+            <p class="product-card__desc">Fresh green tea with a light, clean, and refreshing taste.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 12.000</span>
+              <button class="add-btn" aria-label="Tambah Greentea ke keranjang">+</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <button class="like-btn" aria-label="Sukai Camomile">
+              <img src="assets/icons/love.svg" alt=""><span>245</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Camomile.png" alt="Camomile">
+            <h3 class="product-card__name">Camomile</h3>
+            <p class="product-card__desc">Soothing chamomile flavor with a calming floral note and delicate taste.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 12.000</span>
+              <button class="add-btn" aria-label="Tambah Camomile ke keranjang">+</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- BASIC POWDER (isi contoh, sesuaikan) -->
+      <section class="catalog__panel" id="powder">
+        <h1 class="catalog__title">Basic Powder</h1>
+        <div class="catalog__grid">
+
+          <article class="product-card">
+            <button class="like-btn" aria-label="Sukai Es Cokelat">
+              <img src="assets/icons/love.svg" alt=""><span>180</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Es Cokelat.png" alt="Es Cokelat">
+            <h3 class="product-card__name">Es Cokelat</h3>
+            <p class="product-card__desc">Cold chocolate drink with a rich, sweet, and creamy taste.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 13.000</span>
+              <button class="add-btn" aria-label="Tambah Es Cokelat ke keranjang">+</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- JAJANAN PASAR (isi contoh, sesuaikan) -->
+      <section class="catalog__panel" id="jajanan">
+        <h1 class="catalog__title">Jajanan Pasar</h1>
+        <div class="catalog__grid">
+
+          <article class="product-card">
+            <button class="like-btn is-liked" aria-label="Sukai Dimsum">
+              <img src="assets/icons/love.svg" alt=""><span>610</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Dimsum.png" alt="Dimsum">
+            <h3 class="product-card__name">Dimsum</h3>
+            <p class="product-card__desc">Soft chicken dimsum, soft wrapping, aromatic, and savory bites.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 15.000</span>
+              <button class="add-btn" aria-label="Tambah Dimsum ke keranjang">+</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <button class="like-btn" aria-label="Sukai Gyoza">
+              <img src="assets/icons/love.svg" alt=""><span>270</span>
+            </button>
+            <img class="product-card__image" src="assets/images/Gyoza.png" alt="Gyoza">
+            <h3 class="product-card__name">Gyoza</h3>
+            <p class="product-card__desc">Crispy pan-fried gyoza with a juicy, savory filling.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">IDR 16.000</span>
+              <button class="add-btn" aria-label="Tambah Gyoza ke keranjang">+</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo">KkTF</a>
+        <p>
+          Your daily escape to artisan craftsmanship and authentic flavors.<br>
+          Open: 08:00 - 00.01
+        </p>
+      </div>
+
+      <div class="footer__contact">
+        <h3 class="footer__heading">CONTACT US</h3>
+        <ul>
+          <li>
+            <address>
+              Pasar Rakyat Bareng Lt3<br>
+              Jl. Terusan Ijen, Klojen, Kota Malang
+            </address>
+          </li>
+          <li>
+            <a href="tel:+62274555123">+62 274 555 123</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__explore">
+        <h3 class="footer__heading">SOCIALS</h3>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; 2026 KkTF. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
