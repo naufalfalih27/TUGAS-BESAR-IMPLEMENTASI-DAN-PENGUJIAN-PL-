@@ -10,8 +10,8 @@
 
 :root {
   /* Warna */
-  --red: #a30b12;
-  --red-dark: #8b0a10;
+  --red: #B60015;
+  --red-dark: #8A000D;
   --brown: #7a5c52;
   --pink: #f8e4e0;
   --ink: #3a1d1a;
@@ -772,5 +772,44 @@ address {
   }
   * {
     transition: none !important;
+  }
+}
+
+/* Top Tier Lineup berjalan terus ke kiri */
+.lineup__grid.is-marquee {
+  display: block;
+  overflow: hidden;
+  padding: 0.25rem 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+}
+
+.lineup__track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  padding-right: 1rem;
+  animation: lineup-scroll 40s linear infinite;
+}
+
+.lineup__track .product-card {
+  flex: 0 0 11rem;
+}
+
+/* Berhenti sementara saat kursor di atas kartu */
+.lineup__grid.is-marquee:hover .lineup__track,
+.lineup__grid.is-marquee:focus-within .lineup__track {
+  animation-play-state: paused;
+}
+
+@keyframes lineup-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 768px) {
+  .lineup__track .product-card {
+    flex-basis: 15rem;
   }
 }

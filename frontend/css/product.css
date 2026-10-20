@@ -1,0 +1,271 @@
+/* KkTF - product.css (halaman detail produk) */
+
+[hidden] {
+  display: none !important;
+}
+
+/* Palet: terang (default) */
+.detail-page {
+  --detail-bg: #fff5f2;
+  --box: #f3eae6;
+  --serving-bg: #fde8e3;
+  --pill: #6e5a52;
+  --pill-ink: #ffffff;
+  --opt-off-bg: transparent;
+  --opt-off-ink: var(--text);
+  --opt-line: #b9a8a4;
+  --opt-on-bg: #fde8e3;
+  --opt-on-ink: #3a1d1a;
+  --opt-on-line: var(--red);
+  --like-bg: #fdf1ee;
+  --like-ink: #3a1d1a;
+  background: var(--detail-bg);
+}
+
+/* Palet: gelap */
+[data-theme="dark"] .detail-page {
+  --detail-bg: #1a1413;
+  --box: #2e2321;
+  --serving-bg: #fde8e3;
+  --pill: #231918;
+  --pill-ink: #f6e9e6;
+  --opt-off-bg: #2a1b19;
+  --opt-off-ink: #f6e9e6;
+  --opt-line: #e8dcd8;
+  --opt-on-bg: #fde8e3;
+  --opt-on-ink: #3a1d1a;
+  --opt-on-line: #fde8e3;
+  --like-bg: #f3ebe8;
+  --like-ink: #3a1d1a;
+}
+
+/* NAVBAR versi detail: tanpa menu tengah */
+.navbar.navbar--detail {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background: var(--sidebar);
+}
+.navbar--detail .navbar__actions {
+  gap: 0.75rem;
+}
+
+/* LAYOUT */
+.detail {
+  display: grid;
+  gap: 2rem;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 2rem var(--gutter) 3rem;
+}
+
+/* FOTO */
+.detail__media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  padding: 2rem;
+  background: var(--surface);
+  border-radius: 0.5rem;
+  box-shadow: 0 1.5rem 2.5rem -1rem rgba(0, 0, 0, 0.3);
+}
+.detail__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.detail__media .like-btn {
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 3.5rem;
+  padding: 0.6rem 0;
+  background: var(--like-bg);
+  color: var(--like-ink);
+  border-color: transparent;
+  font-size: 0.75rem;
+}
+.detail__media .like-btn img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* INFO */
+.detail__series {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.detail__name {
+  margin-top: 0.25rem;
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.detail__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  color: var(--red);
+}
+.detail__price s {
+  font-size: 1.125rem;
+  color: var(--muted);
+}
+
+.detail__quote {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--box);
+  border-radius: 0.5rem;
+}
+
+/* SERVING */
+.detail__serving {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem 1.25rem;
+  background: var(--serving-bg);
+  border-radius: 0.5rem;
+  color: #3a1d1a;
+}
+.detail__serving img {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.detail__serving-label {
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+.detail__serving-pill {
+  width: 100%;
+  padding: 0.35rem;
+  text-align: center;
+  font-size: 0.875rem;
+  background: var(--pill);
+  color: var(--pill-ink);
+  border-radius: 0.25rem;
+}
+
+/* Serving yang bisa dipilih (HOT / ICE) */
+.detail__serving-options {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+.serve {
+  flex: 1;
+  padding: 0.35rem;
+  font-size: 0.875rem;
+  text-align: center;
+  color: #3a1d1a;
+  background: transparent;
+  border: 1px solid var(--pill);
+  border-radius: 0.25rem;
+  transition: background 0.2s, color 0.2s;
+}
+.serve[aria-pressed="true"] {
+  color: var(--pill-ink);
+  background: var(--pill);
+}
+
+/* PILIHAN */
+.opt-group {
+  margin-top: 1.75rem;
+}
+.opt-title {
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+}
+.opt-row {
+  display: flex;
+  gap: 0.75rem;
+}
+.opt {
+  flex: 1;
+  padding: 0.85rem 0.5rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--opt-off-ink);
+  background: var(--opt-off-bg);
+  border: 1px solid var(--opt-line);
+  border-radius: 0.25rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.opt:hover {
+  border-color: var(--red);
+}
+.opt[aria-pressed="true"] {
+  color: var(--opt-on-ink);
+  background: var(--opt-on-bg);
+  border-color: var(--opt-on-line);
+}
+
+/* TOMBOL KERANJANG */
+.add-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem;
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  color: #fff;
+  background: var(--red);
+  border-radius: 0.375rem;
+  box-shadow: 0 0.75rem 1.5rem -0.5rem rgba(163, 11, 18, 0.55);
+  transition: background 0.2s;
+}
+.add-cart:hover {
+  background: var(--red-dark);
+}
+.add-cart img {
+  width: 1.25rem;
+  height: 1.25rem;
+  filter: brightness(0) invert(1);
+}
+
+/* FOOTER di halaman detail */
+.detail-page .footer {
+  margin-top: 0;
+  background: var(--sidebar);
+}
+
+/* TABLET ke atas */
+@media (min-width: 768px) {
+  .detail {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  .detail__name {
+    font-size: 2.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar.navbar--detail {
+    padding-left: max(var(--gutter), calc((100% - var(--container)) / 2));
+    padding-right: max(var(--gutter), calc((100% - var(--container)) / 2));
+  }
+}
