@@ -225,3 +225,39 @@ function renderAuth() {
 }
 
 renderAuth();
+
+// ---------- Dropdown akun ----------
+function setupAccountMenu() {
+  const btn = document.getElementById("accountBtn");
+  const menu = document.getElementById("accountMenu");
+  const nameEl = document.getElementById("accountName");
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (!btn || !menu) return;
+
+  const user = getUser();
+  if (user && nameEl) nameEl.textContent = user.username;
+
+  function closeMenu() {
+    menu.hidden = true;
+    btn.setAttribute("aria-expanded", "false");
+  }
+
+  btn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const willOpen = menu.hidden;
+    menu.hidden = !willOpen;
+    btn.setAttribute("aria-expanded", String(willOpen));
+  });
+
+  // Tutup saat klik di luar atau menekan Esc
+  document.addEventListener("click", (event) => {
+    if (!menu.contains(event.target)) closeMenu();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
+  });
+
+  logoutBtn.addEventListener("click", logout);
+}
+
+setupAccountMenu();

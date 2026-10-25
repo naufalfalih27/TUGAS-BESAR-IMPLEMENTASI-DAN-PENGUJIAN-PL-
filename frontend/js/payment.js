@@ -1,23 +1,16 @@
 // KkTF - payment.js (checkout dan pembayaran)
 // Data pesanan dibaca dari keranjang (localStorage "cart"), jenis pesanan dari "orderMode",
 // dan meja dari "reservation" (kalau Dine-in).
+// Metode pembayaran: QRIS dan Pay at the cashier.
 
 (function () {
   "use strict";
 
   const TAX_RATE = 0.1;
 
-  // Kode voucher contoh. Nanti validasi voucher dipindah ke backend.
-  const VOUCHERS = {
-    KKTF10: { type: "percent", value: 10, label: "10% off" },
-    HEMAT5K: { type: "fixed", value: 5000, label: "Rp 5.000 off" },
-  };
-
   const METHODS = {
     qris: "QRIS",
     cashier: "Pay at the cashier",
-    gopay: "GoPay",
-    ovo: "OVO",
   };
 
   const rupiah = (n) => "Rp " + n.toLocaleString("id-ID");
@@ -52,7 +45,6 @@
   const reservation = mode === "dine-in" ? readJSON("reservation", null) : null;
 
   let method = "qris";
-  let voucherCode = null;
 
   // ---------- Jenis pesanan ----------
   document.getElementById("orderTypeLabel").textContent =
@@ -76,18 +68,10 @@
     return parts.join(", ");
   }
 
-  function discountFor(subtotal) {
-    const v = voucherCode && VOUCHERS[voucherCode];
-    if (!v) return 0;
-    if (v.type === "percent") return Math.round((subtotal * v.value) / 100);
-    return Math.min(v.value, subtotal);
-  }
-
   function totals() {
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    const discount = discountFor(subtotal);
-    const tax = Math.round((subtotal - discount) * TAX_RATE);
-    return { subtotal: subtotal, discount: discount, tax: tax, total: subtotal - discount + tax };
+    const tax = Math.round(subtotal * TAX_RATE);
+    return { subtotal: subtotal, tax: tax, total: subtotal + tax };
   }
 
   const itemsEl = document.getElementById("summaryItems");
@@ -124,22 +108,14 @@
     document.getElementById("sumTax").textContent = rupiah(t.tax);
     document.getElementById("sumTotal").textContent = rupiah(t.total);
 
-    const row = document.getElementById("rowDiscount");
-    row.hidden = t.discount === 0;
-    document.getElementById("sumDiscountLabel").textContent =
-      voucherCode ? "Discount (" + voucherCode + ")" : "Discount";
-    document.getElementById("sumDiscount").textContent = "- " + rupiah(t.discount);
-
     payBtn.disabled = cart.length === 0;
   }
 
   // ---------- Metode pembayaran ----------
   const radios = document.querySelectorAll('input[name="pay"]');
-  const walletBtns = document.querySelectorAll(".wallet-btn");
 
   function renderMethod() {
     radios.forEach((r) => (r.checked = r.value === method));
-    walletBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.wallet === method)));
   }
 
   radios.forEach((r) => {
@@ -149,61 +125,35 @@
     });
   });
 
-  walletBtns.forEach((b) => {
-    b.addEventListener("click", () => {
-      method = b.dataset.wallet;
-      renderMethod();
-    });
-  });
-
-  // ---------- Voucher ----------
-  const voucherForm = document.getElementById("voucherForm");
-  const voucherInput = document.getElementById("voucherInput");
-  const voucherMsg = document.getElementById("voucherMsg");
-
-  function say(text, type) {
-    voucherMsg.textContent = text;
-    voucherMsg.className = "voucher__msg" + (type ? " is-" + type : "");
-  }
-
-  voucherForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const code = voucherInput.value.trim().toUpperCase();
-
-    if (!code) {
-      voucherCode = null;
-      say("", "");
-    } else if (VOUCHERS[code]) {
-      voucherCode = code;
-      say("Voucher " + code + " applied: " + VOUCHERS[code].label + ".", "ok");
-    } else {
-      voucherCode = null;
-      say("Voucher code is not valid.", "error");
-    }
-    renderTotals();
-  });
-
   // ---------- Pay Now ----------
   const done = document.getElementById("done");
 
-  payBtn.addEventListener("click", () => {
-    if (!cart.length) return;
-    const t = totals();
+  const qrisModal = document.getElementById("qrisModal");
+  const qrisConfirm = document.getElementById("qrisConfirm");
+  const qrisCancel = document.getElementById("qrisCancel");
+  const qrisNote = document.getElementById("qrisNote");
+  const qrisTimer = document.getElementById("qrisTimer");
 
-    const order = {
+  const QRIS_MINUTES = 15; // masa berlaku kode QR
+  let timerId = null;
+
+  function buildOrder() {
+    const t = totals();
+    return {
       id: "KKTF-" + Date.now().toString(36).toUpperCase(),
       mode: mode,
       table: reservation,
       items: cart,
       subtotal: t.subtotal,
-      discount: t.discount,
-      voucher: voucherCode,
       tax: t.tax,
       total: t.total,
       method: method,
       createdAt: new Date().toISOString(),
     };
+  }
 
+  // Pesanan selesai: simpan, kosongkan keranjang, tampilkan layar sukses
+  function completeOrder(order) {
     try {
       localStorage.setItem("lastOrder", JSON.stringify(order));
       ["cart", "order", "reservation"].forEach((k) => localStorage.removeItem(k));
@@ -216,15 +166,104 @@
     document.getElementById("doneType").textContent =
       (mode === "dine-in" ? "Dine-in" : "Takeaway") +
       (reservation && reservation.table ? " \u00B7 Table " + reservation.table : "");
-    document.getElementById("doneMethod").textContent = METHODS[method];
-    document.getElementById("doneTotal").textContent = rupiah(t.total);
+    document.getElementById("doneMethod").textContent = METHODS[order.method];
+    document.getElementById("doneTotal").textContent = rupiah(order.total);
     document.getElementById("doneText").textContent =
-      method === "cashier"
+      order.method === "cashier"
         ? "Please complete your payment at the cashier."
         : "Thank you! Your payment is being processed.";
 
     done.hidden = false;
     document.body.style.overflow = "hidden";
+  }
+
+  // ---------- QRIS ----------
+  function stopTimer() {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+  }
+
+  function startTimer(seconds) {
+    stopTimer();
+    let left = seconds;
+
+    function paint() {
+      const m = String(Math.floor(left / 60)).padStart(2, "0");
+      const s = String(left % 60).padStart(2, "0");
+      qrisTimer.textContent = m + ":" + s;
+    }
+
+    paint();
+    timerId = setInterval(() => {
+      left -= 1;
+      if (left <= 0) {
+        stopTimer();
+        qrisTimer.textContent = "00:00";
+        qrisConfirm.disabled = true;
+        qrisNote.textContent = "This QR code has expired. Please close and try again.";
+        return;
+      }
+      paint();
+    }, 1000);
+  }
+
+  let pendingOrder = null;
+
+  function openQris(order) {
+    pendingOrder = order;
+    document.getElementById("qrisAmount").textContent = rupiah(order.total);
+    document.getElementById("qrisOrderId").textContent = order.id;
+    qrisNote.textContent = "";
+    qrisConfirm.disabled = false;
+
+    qrisModal.hidden = false;
+    document.body.style.overflow = "hidden";
+    startTimer(QRIS_MINUTES * 60);
+    qrisConfirm.focus();
+  }
+
+  function closeQris() {
+    stopTimer();
+    qrisModal.hidden = true;
+    pendingOrder = null;
+    document.body.style.overflow = "";
+    payBtn.focus();
+  }
+
+  qrisCancel.addEventListener("click", closeQris);
+
+  // Klik area gelap di luar kotak menutup jendela
+  qrisModal.addEventListener("click", (e) => {
+    if (e.target === qrisModal) closeQris();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !qrisModal.hidden) closeQris();
+  });
+
+  // SEMENTARA: tombol "I have paid" langsung menyelesaikan pesanan.
+  // Saat backend siap, pesanan baru dianggap lunas setelah server
+  // menerima konfirmasi dari penyedia pembayaran (webhook atau polling status).
+  qrisConfirm.addEventListener("click", () => {
+    if (!pendingOrder) return;
+    const order = pendingOrder;
+    stopTimer();
+    qrisModal.hidden = true;
+    pendingOrder = null;
+    completeOrder(order);
+  });
+
+  payBtn.addEventListener("click", () => {
+    if (!cart.length) return;
+    const order = buildOrder();
+
+    if (method === "qris") {
+      openQris(order);
+    } else {
+      completeOrder(order);
+    }
   });
 
   // ---------- Mulai ----------

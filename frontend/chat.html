@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tara Assistant | KkTF</title>
+  <meta name="description" content="Ceritakan suasana hatimu, dan asisten KkTF akan merekomendasikan menu yang cocok.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chat.css">
+</head>
+<body class="chat-page">
+
+  <!-- NAVBAR: hanya tombol kembali, logo, dan tombol tema -->
+  <header class="navbar navbar--chat">
+    <div class="navbar__left">
+      <a href="index.html" class="icon-btn" id="backLink" aria-label="Kembali">
+        <img src="assets/icons/back.svg" alt="" onerror="this.replaceWith(document.createTextNode('←'))">
+      </a>
+      <a href="index.html" class="navbar__logo">KkTF</a>
+    </div>
+
+    <div class="navbar__actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Ganti tema">
+        <img src="assets/icons/moon.svg" alt="">
+      </button>
+    </div>
+  </header>
+
+  <main class="chat chat--empty" id="chat">
+    <div class="chat__inner">
+
+      <!-- Sapaan: tampil sebelum percakapan dimulai -->
+      <section class="chat__welcome" id="welcome">
+        <h1 class="chat__title">Hello, Welcome Back Tara&rsquo;s!</h1>
+        <p class="chat__subtitle">Savor the moment, one cup at a time.</p>
+      </section>
+
+      <!-- Percakapan -->
+      <div class="chat__messages" id="messages" role="log" aria-live="polite" aria-label="Percakapan dengan asisten Tara"></div>
+
+      <!-- Saran dan kolom input -->
+      <div class="chat__composer" id="composer">
+        <div class="chat__chips">
+          <button type="button" class="chip" data-text="Is there a hot drinks menu here?">Is there a hot drinks menu here?</button>
+          <button type="button" class="chip" data-text="I want coffee, but I want it with milk">I want coffee, but I want it with milk</button>
+        </div>
+
+        <form class="chat__form" id="chatForm" autocomplete="off">
+          <label class="visually-hidden" for="chatInput">Tulis pesan</label>
+          <input
+            type="text"
+            id="chatInput"
+            name="message"
+            placeholder="what is your mood today ?"
+            maxlength="300">
+          <button type="submit" class="chat__send" id="sendBtn" aria-label="Kirim pesan">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo">KkTF</a>
+        <p>
+          Log in to unlock your daily comfort. No rush, no noise, just the
+          perfect spot to stay inspired.
+        </p>
+      </div>
+
+      <div class="footer__contact">
+        <h3 class="footer__heading">CONTACT US</h3>
+        <ul>
+          <li>
+            <img src="assets/icons/location.svg" alt="">
+            <address>
+              Pasar Rakyat Bareng Lt3<br>
+              Jl. Terusan Ijen, Klojen, Kota Malang
+            </address>
+          </li>
+          <li>
+            <img src="assets/icons/telp.svg" alt="">
+            <a href="tel:+628123456789">+62 812-3456-789</a>
+          </li>
+          <li>
+            <img src="assets/icons/clock.svg" alt="">
+            <span>Open: 08.00 - 00.01</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__explore">
+        <h3 class="footer__heading">EXPLORE</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="catalog.html">Catalog Menu</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; 2026 KkTF. All rights reserved.</p>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/chat.js" defer></script>
+</body>
+</html>

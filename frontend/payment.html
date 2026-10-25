@@ -30,10 +30,15 @@
       <a href="cart.html" class="icon-btn" aria-label="Keranjang">
         <img src="assets/icons/cart.svg" alt="">
       </a>
-      <a href="profile.html" class="icon-btn" data-auth="user" hidden aria-label="Informasi akun">
-        <img src="assets/icons/user.svg" alt="">
-      </a>
-    </div>
+      <div class="account" data-auth="user" hidden>
+        <button class="icon-btn" id="accountBtn" aria-label="Menu akun" aria-expanded="false" aria-haspopup="true">
+          <img src="assets/icons/user.svg" alt="">
+        </button>
+        <div class="account__menu" id="accountMenu" hidden>
+          <p class="account__name" id="accountName"></p>
+          <button type="button" class="account__logout" id="logoutBtn">Logout</button>
+        </div>
+      </div>
   </header>
 
   <main class="pay">
@@ -67,30 +72,7 @@
             <svg class="pay-opt__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-6 9 6M5 9v9M9 9v9M15 9v9M19 9v9M3 21h18M3 9h18"/></svg>
             <span class="pay-opt__text">Pay at the cashier</span>
           </label>
-
-          <div class="pay-opt pay-opt--wallet">
-            <div class="pay-opt__head">
-              <svg class="pay-opt__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M15 12h6v4h-6a2 2 0 0 1 0-4zM3 9h18"/></svg>
-              <span class="pay-opt__text">E-Wallet</span>
-            </div>
-            <div class="wallet-row" role="group" aria-label="Pilih e-wallet">
-              <button type="button" class="wallet-btn wallet-btn--gopay" data-wallet="gopay" aria-pressed="false">GoPay</button>
-              <button type="button" class="wallet-btn wallet-btn--ovo" data-wallet="ovo" aria-pressed="false">OVO</button>
-            </div>
-          </div>
         </div>
-      </section>
-
-      <section class="pay-block">
-        <h2 class="pay-title">Discount Voucher</h2>
-        <form class="voucher" id="voucherForm" novalidate>
-          <div class="voucher__field">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4zM14 6v12"/></svg>
-            <input type="text" id="voucherInput" placeholder="Enter voucher code" autocomplete="off" aria-label="Kode voucher">
-          </div>
-          <button type="submit" class="voucher__btn">Apply</button>
-        </form>
-        <p class="voucher__msg" id="voucherMsg" aria-live="polite"></p>
       </section>
 
     </div>
@@ -106,7 +88,6 @@
 
       <dl class="summary__rows">
         <div><dt>Subtotal</dt><dd id="sumSubtotal">Rp 0</dd></div>
-        <div id="rowDiscount" hidden><dt id="sumDiscountLabel">Discount</dt><dd id="sumDiscount">- Rp 0</dd></div>
         <div><dt>Tax (10%)</dt><dd id="sumTax">Rp 0</dd></div>
       </dl>
 
@@ -145,6 +126,27 @@
         <div><dt>Total</dt><dd id="doneTotal">-</dd></div>
       </dl>
       <a href="index.html" class="done__btn">Back to Home</a>
+    </div>
+  </div>
+
+    <!-- JENDELA QRIS -->
+  <div class="qris" id="qrisModal" hidden role="dialog" aria-modal="true" aria-labelledby="qrisTitle">
+    <div class="qris__box">
+      <h2 class="qris__title" id="qrisTitle">Scan to Pay</h2>
+      <p class="qris__sub">Open your banking or e-wallet app and scan this QRIS code.</p>
+
+      <div class="qris__code">
+        <img src="assets/images/qris.png" alt="Kode QRIS pembayaran">
+      </div>
+
+      <p class="qris__label">Total amount</p>
+      <p class="qris__amount" id="qrisAmount">Rp 0</p>
+      <p class="qris__order">Order <span id="qrisOrderId"></span></p>
+      <p class="qris__timer">Expires in <span id="qrisTimer">15:00</span></p>
+      <p class="qris__note" id="qrisNote" role="status"></p>
+
+      <button type="button" class="qris__confirm" id="qrisConfirm">I have paid</button>
+      <button type="button" class="qris__cancel" id="qrisCancel">Cancel</button>
     </div>
   </div>
 

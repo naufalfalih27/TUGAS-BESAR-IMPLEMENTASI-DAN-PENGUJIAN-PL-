@@ -24,7 +24,7 @@ if (togglePassword && passwordInput) {
   togglePassword.addEventListener("click", () => {
     const isHidden = passwordInput.type === "password";
     passwordInput.type = isHidden ? "text" : "password";
-    togglePassword.textContent = isHidden ? "Hide" : "Show";
+    togglePassword.classList.toggle("is-showing", isHidden);
     togglePassword.setAttribute(
       "aria-label",
       isHidden ? "Sembunyikan password" : "Tampilkan password"

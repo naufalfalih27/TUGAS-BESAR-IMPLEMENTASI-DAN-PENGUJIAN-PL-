@@ -144,101 +144,6 @@
   font-size: 1rem;
 }
 
-/* E-Wallet */
-.pay-opt--wallet {
-  display: block;
-  cursor: default;
-}
-.pay-opt__head {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.wallet-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin-top: 1.1rem;
-}
-.wallet-btn {
-  padding: 0.6rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  background: var(--wallet-bg);
-  border: 1px solid var(--wallet-line);
-  border-radius: 0.25rem;
-  transition: border-color 0.2s, background 0.2s;
-}
-.wallet-btn--gopay { color: #2e9e4f; }
-.wallet-btn--ovo { color: #7b3fd0; }
-.wallet-btn:hover {
-  border-color: var(--red);
-}
-.wallet-btn[aria-pressed="true"] {
-  border-color: var(--red);
-  box-shadow: inset 0 0 0 1px var(--red);
-}
-.pay-opt--wallet:has(.wallet-btn[aria-pressed="true"]) {
-  border-color: var(--red);
-}
-
-/* VOUCHER */
-.voucher {
-  display: flex;
-  gap: 0.75rem;
-}
-.voucher__field {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  padding: 0 1.25rem;
-  color: #6f5f5b;
-  background: var(--field-bg);
-  border: 1px solid var(--opt-line);
-  border-radius: 0.375rem;
-}
-.voucher__field input {
-  flex: 1;
-  min-width: 0;
-  padding: 1.1rem 0;
-  font: inherit;
-  color: #3a1d1a;
-  text-transform: uppercase;
-  background: none;
-  border: 0;
-  outline: none;
-}
-.voucher__field input::placeholder {
-  color: #d9a9a3;
-  text-transform: none;
-}
-.voucher__field:focus-within {
-  border-color: var(--red);
-}
-.voucher__btn {
-  padding: 0 2rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #fff;
-  background: #6e5a52;
-  border-radius: 0.375rem;
-  transition: background 0.2s;
-}
-.voucher__btn:hover {
-  background: #5a4841;
-}
-.voucher__msg {
-  min-height: 1.25rem;
-  margin-top: 0.6rem;
-  font-size: 0.8125rem;
-}
-.voucher__msg.is-ok { color: #2b8a4a; }
-.voucher__msg.is-error { color: var(--red); }
-[data-theme="dark"] .voucher__msg.is-ok { color: #5fd08a; }
-[data-theme="dark"] .voucher__msg.is-error { color: #ff6b73; }
-
 /* RINGKASAN PESANAN (kartu tetap terang di dua tema, seperti Figma) */
 .summary {
   padding: 1.5rem;
@@ -468,4 +373,118 @@
   .voucher__btn {
     padding: 0.9rem;
   }
+}
+
+/* ---------- Jendela QRIS ---------- */
+.qris {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.55);
+}
+.qris[hidden] {
+  display: none;
+}
+
+.qris__box {
+  width: 100%;
+  max-width: 24rem;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+}
+
+.qris__title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+.qris__sub {
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+/* Latar putih tetap dipakai di mode gelap supaya QR mudah dipindai */
+.qris__code {
+  width: 15rem;
+  max-width: 100%;
+  margin: 1.25rem auto;
+  padding: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.qris__code img {
+  width: 100%;
+  height: auto;
+}
+
+.qris__label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.qris__amount {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--red);
+}
+.qris__order {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.qris__timer {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--ink);
+}
+.qris__timer span {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.qris__note {
+  min-height: 1.25rem;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--red);
+}
+
+.qris__confirm {
+  width: 100%;
+  height: 3rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--red);
+  border-radius: 0.25rem;
+}
+.qris__confirm:hover {
+  background: var(--red-dark);
+}
+.qris__confirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.qris__cancel {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.qris__cancel:hover {
+  color: var(--red);
 }

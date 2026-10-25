@@ -124,12 +124,30 @@
 .field__toggle {
   position: absolute;
   top: 50%;
-  right: 0.75rem;
+  right: 0.5rem;
   transform: translateY(-50%);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
   color: var(--red);
+}
+
+/* Mata biasa tampil saat password tersembunyi, mata tercoret saat terlihat */
+.field__toggle .icon-eye-off {
+  display: none;
+}
+.field__toggle.is-showing .icon-eye {
+  display: none;
+}
+.field__toggle.is-showing .icon-eye-off {
+  display: block;
+}
+
+/* Matikan ikon mata dan tombol hapus bawaan Edge */
+.field input[type="password"]::-ms-reveal,
+.field input[type="password"]::-ms-clear {
+  display: none;
 }
 
 .field__error {

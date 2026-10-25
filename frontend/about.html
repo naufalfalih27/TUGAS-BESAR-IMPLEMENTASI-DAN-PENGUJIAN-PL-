@@ -35,9 +35,15 @@
       <a href="cart.html" class="icon-btn" aria-label="Keranjang">
         <img src="assets/icons/cart.svg" alt="">
       </a>
-      <a href="profile.html" class="icon-btn" data-auth="user" hidden aria-label="Informasi akun">
-        <img src="assets/icons/user.svg" alt="">
-      </a>
+      <div class="account" data-auth="user" hidden>
+        <button class="icon-btn" id="accountBtn" aria-label="Menu akun" aria-expanded="false" aria-haspopup="true">
+          <img src="assets/icons/user.svg" alt="">
+        </button>
+        <div class="account__menu" id="accountMenu" hidden>
+          <p class="account__name" id="accountName"></p>
+          <button type="button" class="account__logout" id="logoutBtn">Logout</button>
+        </div>
+      </div>
     </div>
 
   </header>

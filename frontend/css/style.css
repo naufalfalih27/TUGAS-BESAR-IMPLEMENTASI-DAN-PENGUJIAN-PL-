@@ -229,6 +229,44 @@ address {
   height: 1.1rem;
 }
 
+/* Dropdown akun */
+.account {
+  position: relative;
+}
+.account__menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 60;
+  min-width: 11rem;
+  padding: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+.account__name {
+  margin-bottom: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+  word-break: break-word;
+}
+.account__logout {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-size: 0.8125rem;
+  color: var(--red);
+  border-radius: 0.25rem;
+}
+.account__logout:hover {
+  background: var(--sidebar-active);
+}
+
 /* 5. HERO */
 .hero {
   position: relative;
@@ -274,58 +312,6 @@ address {
   line-height: 1.6;
 }
 
-/*6. DEALS*/
-.deals {
-  margin-top: 0;
-  padding: 2.5rem var(--gutter) 2.5rem;
-  background: var(--pink);
-}
-
-.deals__list {
-  display: grid;
-  gap: 1rem;
-  margin-top: 1.25rem;
-}
-
-.deal-card {
-  display: flex;
-  overflow: hidden;
-  border-radius: 0.25rem;
-  color: #fff;
-  min-height: 9rem;
-}
-.deal-card--red {
-  background: var(--red-dark);
-}
-.deal-card--brown {
-  background: var(--brown);
-}
-
-.deal-card__body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: flex-start;
-  gap: 0.5rem;
-  padding: 1rem;
-}
-
-.deal-card__title {
-  font-family: var(--font-heading);
-  font-size: 0.8125rem;
-  font-weight: 500;
-}
-
-.deal-card__text {
-  font-size: 0.75rem;
-  line-height: 1.5;
-}
-
-.deal-card__image {
-  width: 40%;
-  object-fit: cover;
-}
 
 /*7. LINEUP*/
 .lineup {
