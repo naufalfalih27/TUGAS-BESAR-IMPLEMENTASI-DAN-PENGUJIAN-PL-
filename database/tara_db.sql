@@ -183,7 +183,6 @@
     ('Community Gathering', 'Pertemuan komunitas kopi', '2026-12-01', '16:00:00', 'community.jpg', 'Fully booked');
 
     -- Data tabel fasilitas
-<<<<<<< HEAD
     INSERT INTO fasilitas (namaFasilitas, deskripsiFasilitas, image) VALUES
     ('Indoor', 'Cozy atmosphere with warm interiors, ideal for meetings or simply enjoying your favorite coffee.', 'indoor.jpg'),
     ('Semi outdoor', 'An open yet comfortable atmosphere, great for casual meetings or quality time with friends.', 'semi-outdoor.jpg'),
@@ -199,7 +198,6 @@
     (3, 'B-01', 2, 'Available'),
     (4, 'S-04', 1, 'Available'),
     (5, 'S-01', 4, 'Reserved');
-=======
     INSERT INTO fasilitas
     (namaFasilitas, deskripsi, kapasitas, image)
     VALUES
@@ -208,4 +206,3 @@
     ('Wi-Fi', 'Internet gratis untuk pelanggan', 100, 'wifi.jpg'),
     ('Meeting Room', 'Ruangan khusus untuk rapat kecil', 8, 'meeting-room.jpg'),
     ('Live Music Stage', 'Area pertunjukan musik dan event', 50, 'live-music.jpg');
->>>>>>> a97c7f8ad4448cdb18a726849e9e2ed065390689
