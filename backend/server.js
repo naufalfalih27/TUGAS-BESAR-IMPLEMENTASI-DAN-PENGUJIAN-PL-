@@ -5,12 +5,17 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });

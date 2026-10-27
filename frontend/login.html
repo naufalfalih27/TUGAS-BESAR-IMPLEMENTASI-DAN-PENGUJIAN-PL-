@@ -48,14 +48,16 @@
         <form class="auth__form" id="loginForm" action="#" method="post" novalidate>
 
           <div class="field">
-            <label for="identifier">Username, Email, or Phone Number</label>
+            <label for="username">Username</label>
+
             <input
               type="text"
-              id="identifier"
+              id="username"
               placeholder="Username"
               autocomplete="username"
               required>
-            <p class="field__error" id="identifierError" role="alert"></p>
+
+            <p class="field__error" id="usernameError"></p>
           </div>
 
           <div class="field">
@@ -87,7 +89,7 @@
               <input type="checkbox" name="remember">
               <span>Remember me</span>
             </label>
-            <a href="#" class="auth__link">Forgot password?</a>
+            <a href="forgot-password.html" class="auth__link">Forgot password?</a>
           </div>
 
           <button type="submit" class="auth__submit">Login</button>

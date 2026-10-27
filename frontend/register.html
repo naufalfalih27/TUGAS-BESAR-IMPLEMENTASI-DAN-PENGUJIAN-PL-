@@ -46,6 +46,15 @@
         <p class="auth__subtitle">Experience the warmth of Tara in every cup.</p>
 
         <form class="auth__form" id="registerForm" action="#" method="post" novalidate>
+          <div class="field">
+            <label for="namaUser">Full Name</label>
+            <input
+              type="text"
+              id="namaUser"
+              placeholder="Full name"
+              required>
+            <p class="field__error"></p>
+          </div>
 
           <div class="field">
             <label for="username">Username</label>
@@ -95,7 +104,16 @@
             <p class="field__hint">Minimal 8 karakter.</p>
             <p class="field__error" id="passwordError" role="alert"></p>
           </div>
-
+          <div class="field">
+            <label for="role">Role</label>
+            <select id="role" required>
+              <option value="" disabled selected>Select role</option>
+              <option value="Cashier">Cashier</option>
+              <option value="Admin">Admin</option>
+              <option value="Owner">Owner</option>
+            </select>
+            <p class="field__error"></p>
+          </div>
           <div class="terms">
             <label class="check">
               <input type="checkbox" id="terms" name="terms" required>

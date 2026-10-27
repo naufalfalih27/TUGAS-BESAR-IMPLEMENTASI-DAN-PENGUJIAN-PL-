@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu | KkTF Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-page is-guarded">
+
+  <!-- NAVBAR -->
+  <header class="navbar navbar--admin">
+    <div class="navbar__left">
+      <a href="admin.html" class="navbar__logo">KkTF</a>
+      <span class="admin-tag">Admin</span>
+    </div>
+
+    <div class="navbar__actions">
+      <span class="admin-user" id="adminName"></span>
+      <a href="index.html" class="admin-link">View site</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Ganti tema">
+        <img src="assets/icons/moon.svg" alt="">
+      </button>
+      <button type="button" class="admin-link admin-link--danger" id="adminLogout">Logout</button>
+    </div>
+  </header>
+
+  <div class="admin">
+
+    <!-- SIDEBAR -->
+    <nav class="admin__sidebar" aria-label="Menu admin">
+      <a href="admin.html" class="side-link">
+        <svg class="side-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="admin-menu.html" class="side-link is-active" aria-current="page">
+        <svg class="side-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h14v5a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8z"/><path d="M17 9h2a2 2 0 0 1 0 5h-2"/><path d="M7 3v2M11 3v2"/></svg>
+        Menu
+      </a>
+      <a href="admin-orders.html" class="side-link">
+        <svg class="side-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6"/></svg>
+        Orders
+      </a>
+    </nav>
+
+    <!-- ISI -->
+    <main class="admin__main">
+
+      <div class="page-head">
+        <h1 class="page-title">Manage Menu</h1>
+        <button type="button" class="a-btn a-btn--primary" id="addMenuBtn">+ Add menu</button>
+      </div>
+
+      <!-- Penyaring -->
+      <div class="toolbar">
+        <div class="fld fld--grow">
+          <label for="searchMenu">Search</label>
+          <input type="search" id="searchMenu" placeholder="Search menu name">
+        </div>
+        <div class="fld">
+          <label for="filterCategory">Category</label>
+          <select id="filterCategory">
+            <option value="">All categories</option>
+            <option value="1">Tara Signature Coffee</option>
+            <option value="2">Tara Coffee Basic</option>
+            <option value="3">Basic Tea</option>
+            <option value="4">Basic Powder</option>
+            <option value="5">Jajanan Pasar</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label for="filterStatus">Status</label>
+          <select id="filterStatus">
+            <option value="">All status</option>
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="table-note" id="menuCount" aria-live="polite"></p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Photo</th>
+              <th scope="col">Menu</th>
+              <th scope="col">Category</th>
+              <th scope="col">Price</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Status</th>
+              <th scope="col"><span class="visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody id="menuBody"></tbody>
+        </table>
+        <p class="panel__empty" id="menuEmpty" hidden>No menu matches your filter.</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FORMULIR TAMBAH / UBAH -->
+  <dialog class="dlg" id="menuDialog" aria-labelledby="menuDialogTitle">
+    <form id="menuForm" novalidate>
+      <div class="dlg__head">
+        <h2 class="dlg__title" id="menuDialogTitle">Add menu</h2>
+        <button type="button" class="icon-btn" id="menuClose" aria-label="Tutup">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <div class="dlg__body">
+        <input type="hidden" id="fId">
+
+        <div class="fld">
+          <label for="fName">Menu name</label>
+          <input type="text" id="fName" maxlength="60" required>
+          <p class="fld__error" id="eName"></p>
+        </div>
+
+        <div class="fld">
+          <label for="fDesc">Description</label>
+          <textarea id="fDesc" rows="3" maxlength="160"></textarea>
+          <p class="fld__error" id="eDesc"></p>
+        </div>
+
+        <div class="fld-row">
+          <div class="fld">
+            <label for="fCategory">Category</label>
+            <select id="fCategory">
+              <option value="1">Tara Signature Coffee</option>
+              <option value="2">Tara Coffee Basic</option>
+              <option value="3">Basic Tea</option>
+              <option value="4">Basic Powder</option>
+              <option value="5">Jajanan Pasar</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label for="fUnit">Unit</label>
+            <select id="fUnit">
+              <option value="Gelas">Gelas</option>
+              <option value="Porsi">Porsi</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fld-row">
+          <div class="fld">
+            <label for="fPrice">Price (Rp)</label>
+            <input type="number" id="fPrice" min="0" step="500" inputmode="numeric">
+            <p class="fld__error" id="ePrice"></p>
+          </div>
+          <div class="fld">
+            <label for="fStatus">Status</label>
+            <select id="fStatus">
+              <option value="Available">Available</option>
+              <option value="Unavailable">Unavailable</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fld-row">
+          <div class="fld">
+            <label for="fStock">Stock</label>
+            <input type="number" id="fStock" min="0" step="1" inputmode="numeric">
+            <p class="fld__error" id="eStock"></p>
+          </div>
+          <div class="fld">
+            <label for="fStockMin">Minimum stock</label>
+            <input type="number" id="fStockMin" min="0" step="1" inputmode="numeric">
+            <p class="fld__error" id="eStockMin"></p>
+          </div>
+        </div>
+
+        <div class="fld">
+          <label for="fPhoto">Photo</label>
+          <div class="photo">
+            <div class="photo__preview" id="photoPreview">No photo</div>
+            <div class="photo__side">
+              <input type="file" id="fPhoto" accept="image/jpeg,image/png,image/webp">
+              <p class="fld__hint">JPG, PNG, or WebP, up to 5 MB. The image is resized automatically.</p>
+            </div>
+          </div>
+          <p class="fld__error" id="ePhoto"></p>
+        </div>
+      </div>
+
+      <div class="dlg__foot">
+        <button type="button" class="a-btn a-btn--ghost" id="menuCancel">Cancel</button>
+        <button type="submit" class="a-btn a-btn--primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- KONFIRMASI -->
+  <dialog class="dlg dlg--small" id="confirmDialog" aria-labelledby="confirmTitle">
+    <form method="dialog">
+      <div class="dlg__body">
+        <h2 class="dlg__title" id="confirmTitle">Delete menu?</h2>
+        <p class="dlg__text" id="confirmText"></p>
+      </div>
+      <div class="dlg__foot">
+        <button type="submit" value="cancel" class="a-btn a-btn--ghost">Cancel</button>
+        <button type="submit" value="ok" class="a-btn a-btn--danger" id="confirmOk">Delete</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/admin.js" defer></script>
+  <script src="js/admin-menu.js" defer></script>
+</body>
+</html>
