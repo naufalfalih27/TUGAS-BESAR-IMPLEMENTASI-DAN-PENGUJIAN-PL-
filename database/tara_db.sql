@@ -3,12 +3,13 @@
 
     -- Tabel users
     CREATE TABLE users (
-        userID INT AUTO_INCREMENT PRIMARY KEY,
-        namaUser VARCHAR(100) NOT NULL,
-        username VARCHAR(50) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL,
-        role ENUM('Admin', 'Cashier', 'Owner') NOT NULL,
-        statusUser ENUM('Active', 'Inactive') DEFAULT 'Active'
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('Admin', 'Cashier', 'Owner') NOT NULL,
+    statusUser ENUM('Pending', 'Active', 'Inactive')
+        NOT NULL DEFAULT 'Pending'
     );
 
     -- Tabel kategori menu
@@ -99,6 +100,28 @@
         deskripsi TEXT,
         kapasitas INT,
         image VARCHAR(255)
+    );
+
+    CREATE TABLE email_verification (
+    verificationID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    verificationCode VARCHAR(10) NOT NULL,
+    expiresAt DATETIME NOT NULL,
+    isUsed TINYINT(1) DEFAULT 0,
+    FOREIGN KEY (userID)
+        REFERENCES users(userID)
+        ON DELETE CASCADE
+    );
+
+    CREATE TABLE password_reset (
+    resetID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    resetToken VARCHAR(255) NOT NULL,
+    expiresAt DATETIME NOT NULL,
+    isUsed TINYINT(1) DEFAULT 0,
+    FOREIGN KEY (userID)
+        REFERENCES users(userID)
+        ON DELETE CASCADE
     );
 
     -- Data tabel user
