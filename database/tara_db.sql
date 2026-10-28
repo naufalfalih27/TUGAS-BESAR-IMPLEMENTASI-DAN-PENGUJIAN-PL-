@@ -126,14 +126,14 @@
 
     -- Data tabel user
     INSERT INTO users
-    (namaUser, username, password, role, statusUser)
+    (username, password, role, statusUser)
     VALUES
-    ('Ana', 'anana', 'ana123', 'Cashier', 'Active'),
-    ('Putri', 'putt3', 'putri123', 'Cashier', 'Active'),
-    ('Tari', 'tariri', 'tari123', 'Admin', 'Active'),
-    ('Putra', 'putraa', 'putra123', 'Cashier', 'Active'),
-    ('Tara', 'tarara', 'tara123', 'Owner', 'Active'),
-    ('Tata', 'tatata', 'tata123', 'Cashier', 'Active');
+    ('anana', 'ana123', 'Cashier', 'Active'),
+    ('putt3', 'putri123', 'Cashier', 'Active'),
+    ('tariri', 'tari123', 'Admin', 'Active'),
+    ('putraa', 'putra123', 'Cashier', 'Active'),
+    ('tarara', 'tara123', 'Owner', 'Active'),
+    ('tatata', 'tata123', 'Cashier', 'Active');
 
     -- Data tabel kategori_menu
     INSERT INTO kategori_menu
