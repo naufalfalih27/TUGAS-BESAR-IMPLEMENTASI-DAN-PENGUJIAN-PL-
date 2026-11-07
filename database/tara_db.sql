@@ -7,7 +7,7 @@
     email VARCHAR(100) UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('Admin', 'Cashier', 'Owner') NOT NULL,
+    role ENUM('Admin', 'Cashier', 'Owner', 'Customer') NOT NULL,
     statusUser ENUM('Pending', 'Active', 'Inactive')
         NOT NULL DEFAULT 'Pending'
     );
@@ -41,6 +41,28 @@
         lokasiMeja ENUM('Indoor', 'Outdoor', 'Bar', 'Semi Outdoor') NOT NULL,
         statusMeja ENUM('Available', 'Selected', 'Reserved') DEFAULT 'Available'
     );
+
+    --tambahin di sql !!!
+    create table reservasi_meja (
+        reservasiID INT AUTO_INCREMENT PRIMARY KEY,
+        mejaID INT NOT NULL,
+        userID INT NULL,
+        kodeJual INT NULL,
+        namaTamu VARCHAR(100) NOT NULL,
+        tanggalReservasi DATE NOT NULL,
+        jamMulai TIME NOT NULL,
+        jamSelesai TIME NOT NULL,
+        statusReservasi ENUM(
+            'Pending',
+            'Confirmed',
+            'Cancelled',
+            'Completed'
+        ) DEFAULT 'Pending', 
+
+        foreign key (mejaID) references meja(mejaID),
+        foreign key (userID) references users(userID),
+        foreign key (kodeJual) references penjualan(kodeJual),
+    ); 
 
     -- Tabel penjualan 
     CREATE TABLE penjualan (
@@ -125,15 +147,24 @@
     );
 
     -- Data tabel user
+    -- INSERT INTO users
+    -- (username, password, role, statusUser)
+    -- VALUES
+    -- ('anana', 'ana123', 'Cashier', 'Active'),
+    -- ('putt3', 'putri123', 'Cashier', 'Active'),
+    -- ('tariri', 'tari123', 'Admin', 'Active'),
+    -- ('putraa', 'putra123', 'Cashier', 'Active'),
+    -- ('tarara', 'tara123', 'Owner', 'Active'),
+    -- ('tatata', 'tata123', 'Cashier', 'Active');
+
+    -- masukin sql !!
     INSERT INTO users
-    (username, password, role, statusUser)
+    (email, username, password, role, statusUser)
     VALUES
-    ('anana', 'ana123', 'Cashier', 'Active'),
-    ('putt3', 'putri123', 'Cashier', 'Active'),
-    ('tariri', 'tari123', 'Admin', 'Active'),
-    ('putraa', 'putra123', 'Cashier', 'Active'),
-    ('tarara', 'tara123', 'Owner', 'Active'),
-    ('tatata', 'tata123', 'Cashier', 'Active');
+    ('customer@gmail.com', 'customer1', 'HASH_BCRYPT', 'Customer', 'Active'),
+    ('admin@gmail.com', 'admin1', 'HASH_BCRYPT', 'Admin', 'Active'),
+    ('cashier@gmail.com', 'cashier1', 'HASH_BCRYPT', 'Cashier', 'Active'),
+    ('owner@gmail.com', 'owner1', 'HASH_BCRYPT', 'Owner', 'Active');
 
     -- Data tabel kategori_menu
     INSERT INTO kategori_menu

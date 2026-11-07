@@ -1,0 +1,22 @@
+user role customer:
+- jika login:
+    1. create akun
+    2. masuk untuk bisa melihat history pemesanan
+    3. akses home, about us, menu
+    4. masukin keranjang
+    5. jika ingin membayar, harus memilih table layout
+    6. confirm pembayaran
+- tidak login:
+    1. akses home, about us, menu
+    2. masukin keranjang
+    3. jika ingin membayar, harus memilih table layout
+    4. confirm pembayaran
+    5. keluar nota
+
+user role admin dan owner:
+1. edit home, about us, catalog menu seperti konsep CRUD
+2. konfirmasi log in user jika itu customer, agar dpt menentukan rolenya sehingga yg terbuka hanya page tanpa bisa edit menu website
+3. konfirmasi table layout di tanggal sekian pada jam sekian, jika customer sudah memesan layout table untuk melihat event
+
+user kasir:
+1. melakukan konfirmasi pembayaran setelah pembayaran tersebut masuk, agar customer tidak bohong
